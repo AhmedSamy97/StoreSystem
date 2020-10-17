@@ -7,7 +7,7 @@ namespace StoreSystem.Models
     public class Item
     {
 
-       // public Guid? ItemId { get; set; }
+        // public Guid? ItemId { get; set; }
         public int SubCategoryId { get; set; }
         public int Qty { get; set; }
         public decimal PricePerUnit { get; set; }

@@ -1,0 +1,99 @@
+<div class="col-md-10">
+    <table class="table categories">
+        <thead>
+            <tr>
+
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <!-- <th scope="col">Action</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ ItemData?.name }}</td>
+                <td>{{  ItemData?.qtys }}</td>
+                <td>
+                    <button (click)="Add()" style="background-color: red;" class="btn btn-default">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Store System
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+
+            <div class="input-group">
+                <div class="input-group-append">
+                    Price : {{price}}
+                </div>
+            </div>
+            <div *ngIf="price > 0" class="input-group">
+                <div class="input-group-append">
+                    Click Ok To Continue purchase
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+
+        <div *ngIf="price > 0">
+            <button type="button" class="btn btn-info" (click)="placeOrder()">
+                Place Order
+            </button>
+        </div>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+    Check Out
+</button>
+
+
+<ng-template #warning let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Store System
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+
+            <div class="input-group">
+                <div class="input-group-append">
+                    <p class="text text-danger">You have Reached To Min Quantity</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+
+        <div *ngIf="price > 0">
+            <button type="button" class="btn btn-info" (click)="modal.dismiss('Cross click')">
+                OK
+            </button>
+        </div>
+    </div>
+</ng-template>

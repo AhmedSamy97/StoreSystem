@@ -2,7 +2,7 @@
 
 namespace StoreSystem.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitailCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,7 +44,7 @@ namespace StoreSystem.Migrations
                 columns: table => new
                 {
                     SubCategoryID = table.Column<int>(nullable: false),
-                    PricePerUnit = table.Column<decimal>(type: "money", nullable: false),
+                    PricePerUnit = table.Column<double>(type: "money", nullable: false),
                     Qty = table.Column<int>(nullable: false),
                     MinQty = table.Column<int>(nullable: true)
                 },

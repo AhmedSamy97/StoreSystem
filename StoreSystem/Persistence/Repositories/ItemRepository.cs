@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StoreSystem.Core;
 using StoreSystem.Data;
+using StoreSystem.Dtos;
 using StoreSystem.Models;
 
 namespace StoreSystem.Persistence.Repositories
 {
-    public class ItemRepository:IItemRepository
+    public class ItemRepository : IItemRepository
     {
         private readonly DataContext _context;
 
@@ -17,11 +18,20 @@ namespace StoreSystem.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<Item>> GetAllItemOfSpecificSubCategory(int subcategoryId)
+        public async Task<ItemInformation> GetAllItemOfSpecificSubCategory(int subcategoryId)
         {
-            return await _context.Items.Where(i => i.SubCategoryId == subcategoryId).ToListAsync();
+            var AllItems = await GetListSortedWithPrice(subcategoryId);
+            
+            var Iteminfo = new ItemInformation(AllItems);
+            Iteminfo.Qtys = Iteminfo.Quantities.Sum();
+            return Iteminfo;
         }
 
+        private async Task<List<Item>> GetListSortedWithPrice(int subcategoryId)
+        {
+            return await _context.Items.Where(i => i.SubCategoryId == subcategoryId)
+                .Include(a => a.SubCategory).OrderBy(a => a.PricePerUnit).ToListAsync();
+        }
         public async Task<bool> AddNewItem(Item item)
         {
             bool status = false;
@@ -34,9 +44,13 @@ namespace StoreSystem.Persistence.Repositories
             return status;
         }
 
-        public async Task<Item> EditQuantityinItems(Item item)
+        public async Task  EditQuantityinItems(EditItemDto dto)
         {
-            throw new System.NotImplementedException();
+            var SortedItem = await GetListSortedWithPrice(dto.subcategoryId);
+            for (int i = 0; i < SortedItem.Count; i++)
+            {
+                SortedItem[i].Qty = dto.qtysArr[i];
+            }
         }
 
         private bool CheckValidateItem(Item item)

@@ -36,6 +36,9 @@ namespace StoreSystem.Data
 
                 entity.Property(e => e.PricePerUnit).HasColumnType("money");
 
+                entity.Property(e => e.PricePerUnit)
+                    .HasConversion<double>();
+
                 entity.HasOne(d => d.SubCategory)
                     .WithMany(p => p.Items)
                     .HasForeignKey(d => d.SubCategoryId)

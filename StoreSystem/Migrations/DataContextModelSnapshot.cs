@@ -39,7 +39,7 @@ namespace StoreSystem.Migrations
                         .HasColumnName("SubCategoryID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("PricePerUnit")
+                    b.Property<double>("PricePerUnit")
                         .HasColumnType("money");
 
                     b.Property<int?>("MinQty")

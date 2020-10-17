@@ -9,8 +9,8 @@ using StoreSystem.Data;
 namespace StoreSystem.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201017074444_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201017203003_InitailCreate")]
+    partial class InitailCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,7 +41,7 @@ namespace StoreSystem.Migrations
                         .HasColumnName("SubCategoryID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("PricePerUnit")
+                    b.Property<double>("PricePerUnit")
                         .HasColumnType("money");
 
                     b.Property<int?>("MinQty")

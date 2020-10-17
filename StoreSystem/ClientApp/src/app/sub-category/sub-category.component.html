@@ -1,18 +1,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <h2>Categories </h2>
+            <h4>SubCategory </h4>
         </div>
         <div class="offset-md-2">
-            <button class="btn btn-info">Add Category</button>
+            <button class="btn btn-info">Add SubCategory</button>
         </div>
     </div>
     <div class="row categories">
-        <div class="card col-md-3 offset-md-1" *ngFor="let item of categories">
+        <div class="card col-md-3 offset-md-1" *ngFor="let item of subCategories">
             <div class="card-body centerContent">
                 <i class="fa fa-user fa-5x"></i>
                 <h5 class="card-title">{{item.name}}</h5>
-                <a routerLink="/subcategory/{{item.id}}" class="btn btn-primary">SubCategory</a>
+                <a routerLink="/item/{{item.subCategoryId}}" class="btn btn-primary">Show Item</a>
             </div>
         </div>
     </div>
