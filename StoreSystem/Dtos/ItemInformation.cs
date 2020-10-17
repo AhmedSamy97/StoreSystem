@@ -16,10 +16,13 @@ namespace StoreSystem.Dtos
         public int? MinQty { get; set; }
         public ItemInformation(List<Item> items)
         {
-            Name = items[0].SubCategory.Name;
-            SubcategoryID = items[0].SubCategoryId;
-            Prices = GetPricesArray(items);
-            Quantities = GetQuantities(items);
+            if (items.Count > 0)
+            {
+                Name = items[0].SubCategory.Name;
+                SubcategoryID = items[0].SubCategoryId;
+                Prices = GetPricesArray(items);
+                Quantities = GetQuantities(items);
+            }
             //MinQty = items[0].MinQty.Value;
         }
 

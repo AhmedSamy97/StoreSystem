@@ -21,9 +21,11 @@ namespace StoreSystem.Persistence.Repositories
         public async Task<ItemInformation> GetAllItemOfSpecificSubCategory(int subcategoryId)
         {
             var AllItems = await GetListSortedWithPrice(subcategoryId);
-            
+
             var Iteminfo = new ItemInformation(AllItems);
-            Iteminfo.Qtys = Iteminfo.Quantities.Sum();
+            if (AllItems.Count() > 0)
+                Iteminfo.Qtys = Iteminfo.Quantities.Sum();
+
             return Iteminfo;
         }
 
@@ -44,7 +46,7 @@ namespace StoreSystem.Persistence.Repositories
             return status;
         }
 
-        public async Task  EditQuantityinItems(EditItemDto dto)
+        public async Task EditQuantityinItems(EditItemDto dto)
         {
             var SortedItem = await GetListSortedWithPrice(dto.subcategoryId);
             for (int i = 0; i < SortedItem.Count; i++)
